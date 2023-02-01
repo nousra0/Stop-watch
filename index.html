@@ -38,7 +38,9 @@
      let Reset = document.getElementById('reset');
      let Interval
 
-     Start.addEventListener('click', () => {
+     
+     function startWatch(){
+          Start.removeEventListener('click', startWatch)
           Interval = setInterval(() => {
                milleSec++;
                if (milleSec <= 9) {
@@ -68,12 +70,14 @@
                if (minutes === 59) {
                     clearInterval(Interval)
                }
-
           }, 18);
-     })
+     }
+     
+     Start.addEventListener('click', startWatch)
 
      Stop.addEventListener('click', () => {
           clearInterval(Interval)
+          Start.addEventListener('click', startWatch)
      })
 
      Reset.onclick = function () {
